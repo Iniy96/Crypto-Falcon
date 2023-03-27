@@ -2,6 +2,7 @@ import { CircularProgress } from '@mui/material'
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
+import Chart from 'chart.js/auto';
 import { CurrencyContext } from '../../context/CurrencyContext'
 import { HistoricalChart } from '../../services/api'
 
@@ -18,7 +19,7 @@ const HistoryChart = ({coin}) => {
     }
 
     useEffect(() => {
-     // fetchHistoricDataFromApi()
+      fetchHistoricDataFromApi()
     }, [currency,days])
     
 
@@ -26,7 +27,7 @@ const HistoryChart = ({coin}) => {
     <div>{
         !historicalData ? <CircularProgress
         style={{color:"gold"}} size={250} thickness={1} />
-        : <>
+        : <div >
         <Line 
         data={{
             labels: historicalData.map((coin)=>{
@@ -40,13 +41,29 @@ const HistoryChart = ({coin}) => {
             }),
 
             datasets:[
-                {data: historicalData.map((coin)=> coin[1]) }
+                {
+                    data: historicalData.map((coin) => coin[1]),
+                    label: `Price ( Past ${days} Days ) in ${currency}`,
+                    borderColor: "#EEBC1D",
+                  },
             ]
         }}
-
+        options={{
+            elements:{
+                point:{
+                    radius:1,
+                }
+            }
+        }}
          
         />
-        </>
+        <div className='container d-flex justify-content-center gap-4'>
+            <button onClick={()=> setdays(1)} className='btn btn-warning'>24 hours</button>
+            <button onClick={()=> setdays(30)} className='btn btn-warning'>30 days</button>
+            <button onClick={()=> setdays(90)} className='btn btn-warning'>90 days</button>
+            <button onClick={()=> setdays(365)} className='btn btn-warning'>365 days</button>
+        </div>
+        </div>
         }</div>
   )
 }

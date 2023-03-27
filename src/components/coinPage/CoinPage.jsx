@@ -33,8 +33,8 @@ const CoinPage = () => {
       {
         singleCoinData ? (
 
-          <div className='d-flex ' >
-            <div className='col col-lg-4 p-4 border-end'>
+          <div className='d-flex flex-column flex-lg-row' >
+            <div className='col col-lg-3 p-4 pt-0 border-end'>
               <div className='text-center mt-4'>
                 <img src={singleCoinData.image.large} style={{ height: "160px" }} />
               </div>
@@ -48,7 +48,8 @@ const CoinPage = () => {
                 numberWithcommas(singleCoinData.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</nobr>
               </div>
             </div>
-            <div className='col col-8 d-flex justify-content-center align-items-center'>
+            <div className='col-12 col-lg-9 p-4 mx-auto ' >
+              <div></div>
               <HistoryChart coin={singleCoinData }/>
             </div>
           </div>
