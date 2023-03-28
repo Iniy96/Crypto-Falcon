@@ -1,10 +1,12 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { CurrencyContext } from '../context/CurrencyContext'
+import { AuthModal } from './authentication/AuthModal'
+import UserSideBar from './authentication/UserSideBar'
 
 const Header = () => {
 
-    const {currency,setcurrency} = useContext(CurrencyContext)
+    const {currency,setcurrency,user} = useContext(CurrencyContext)
 
 
 
@@ -18,7 +20,12 @@ const Header = () => {
                         <option value="INR">INR</option>
                         <option value="USD">USD</option>
                     </select>
-                    {/* <button className="btn btn-outline-success btn-light " type="submit">Login</button> */}
+                    {
+                        user ? <UserSideBar/> : <AuthModal/>
+                    }
+                    
+
+                    
                 </div>
             </div>
         </nav>

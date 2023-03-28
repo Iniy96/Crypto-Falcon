@@ -6,12 +6,15 @@ import Chart from 'chart.js/auto';
 import { CurrencyContext } from '../../context/CurrencyContext'
 import { HistoricalChart } from '../../services/api'
 
+
+Chart.register()
+
 const HistoryChart = ({coin}) => {
 
     const [historicalData, sethistoricalData] = useState()
     const [days,setdays] =useState(1)
 
-    const {currency,currencySymbol}=useContext(CurrencyContext)
+    const {currency}=useContext(CurrencyContext)
 
     const fetchHistoricDataFromApi=async()=>{
         const {data}= await axios.get(HistoricalChart(coin.id,days,currency))
@@ -20,6 +23,7 @@ const HistoryChart = ({coin}) => {
 
     useEffect(() => {
       fetchHistoricDataFromApi()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currency,days])
     
 

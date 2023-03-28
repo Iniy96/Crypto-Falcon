@@ -8,11 +8,10 @@ import { CoinList } from '../../../services/api'
 export const HomeBody = () => {
 
     const [searchedCoin, setsearchedCoin] = useState("")
-    const [coinList, setcoinList] = useState([])
-    const [progress, setprogress] = useState(false)
+    
     const [page, setpage] = useState(1)
 
-    const { currency, currencySymbol } = useContext(CurrencyContext)
+    const { currency, currencySymbol,coinList, setcoinList,progress, setprogress } = useContext(CurrencyContext)
 
     const fetchCoinListFromApi = async () => {
         setprogress(true)
@@ -24,6 +23,7 @@ export const HomeBody = () => {
 
     useEffect(() => {
         fetchCoinListFromApi()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currency])
 
 
@@ -49,7 +49,7 @@ export const HomeBody = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {progress ? <LinearProgress style={{ backgroundColor: "gold" }}/>
+                        {progress ? <tr><td colSpan="4"><LinearProgress style={{ backgroundColor: "gold" }}/></td></tr>
                             : coinList.filter((coin) => {
                                 return coin.name.toLowerCase().includes(searchedCoin.toLowerCase()) || coin.symbol.toLowerCase().includes(searchedCoin.toLowerCase())
                             }).slice((page - 1) * 10, (page - 1) * 10 + 10)
@@ -59,7 +59,7 @@ export const HomeBody = () => {
                                             <td className='ps-1'>
                                                     <Link to={`/coin/${coin.id}`}>
                                                 <div className=' d-flex text-dark gap-3' >
-                                                        <img style={{ height: "50px" }} src={coin.image} />
+                                                        <img style={{ height: "50px" }} src={coin.image} alt={""} />
                                                         <div>
                                                             <div className='fs-5'>{coin.symbol.toUpperCase()}</div>
                                                             <div>{coin.name}</div>
@@ -95,7 +95,7 @@ export const HomeBody = () => {
                     setpage(value);
                     window.scroll(0, 450)
                 }}
-                count={(coinList.length / 10).toFixed(0)}
+                count={Number((coinList.length / 10).toFixed(0))}
             />
         </div>
 

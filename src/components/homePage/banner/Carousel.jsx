@@ -19,6 +19,7 @@ const Carousel = () => {
 
     useEffect(() => {
         fetchTrendingCoinsFromApi()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currency])
 
     const items = trendingCoins.map((coin) => {
@@ -29,7 +30,7 @@ const Carousel = () => {
 
         return (
             <Link to={`/coin/${coin.id}`}  >
-                <img src={coin.image} style={{ height: "70px" }} />
+                <img src={coin.image} style={{ height: "70px" }} alt={""}/>
                 <p className='fs-6 mt-3 text-white'>{coin.symbol} <span>{
                     coin.price_change_percentage_24h > 0
                         ? <span style={{ color: 'green' }}>+{coin.price_change_percentage_24h.toFixed(2)}%</span>

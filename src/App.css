@@ -26,28 +26,3 @@ a{
 }
 
 
-
-.d-flex {
-    align-items: center;
-}
-
-.form-control {
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 1px solid #eee;
-    border-radius: 0;
-    padding: 0;
-    transition: border-color 0.2s linear;
-}
-
-.form-control:focus {
-    box-shadow: none;
-    border-bottom: 2px solid #4dd1e1;
-    backface-visibility: hidden;
-}
-
-i.fa-search {
-    margin-top: 0.3rem;
-    margin-right: 1rem;
-}
